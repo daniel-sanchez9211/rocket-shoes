@@ -20,17 +20,17 @@ class Home extends Component {
 
         const data = response.data.map(product => ({
             ...product,
-            priceFormated: formatPrice(product.price)
+            priceFormatted: formatPrice(product.price)
         }))
 
         this.setState({ products: data })
 
     }
 
-    handleAddProduct = (product) => {
-        const { addToCart } = this.props
+    handleAddProduct = (id) => {
+        const { addToCartRequest } = this.props
 
-        addToCart(product)
+        addToCartRequest(id)
     }
 
     render() {
@@ -43,9 +43,9 @@ class Home extends Component {
                     <li key={product.id}>
                         <img src={product.image} alt="Tênis" />
                         <strong>{product.title}</strong>
-                        <span>{product.priceFormated}</span>
+                        <span>{product.priceFormatted}</span>
 
-                        <button type="button" onClick={() => this.handleAddProduct(product)}>
+                        <button type="button" onClick={() => this.handleAddProduct(product.id)}>
                             <div>
                                 <MdAddShoppingCart size={16} color="#fff" /> {amount[product.id] || 0}
                             </div>
